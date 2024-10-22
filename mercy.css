@@ -1,0 +1,40 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: conic-gradient(purple,black,purple,black,purple,black,purple,black,purple,black,purple,black,purple,black );
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+}
+
+.name {
+    font-size: 100px; /* Size of the text */
+    color:skyblue;
+    cursor: pointer;
+}
+
+.heart {
+    position: absolute;
+    bottom: 0;
+    font-size: 30px; /* Size of the small hearts */
+    color: purple; /* Heart color */
+    opacity: 1;
+    animation-name: float;
+    animation-timing-function: linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh); /* Move to the top */
+        opacity: 0; /* Fade out */
+    }
+}
