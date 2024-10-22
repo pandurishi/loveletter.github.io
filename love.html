@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying Hearts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color:black;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .heart {
+            width: 30px;
+            height: 30px;
+            background-color: purple;
+            position: relative;
+            margin: 10px;
+            transform: rotate(-45deg);
+            z-index: 2; /* Bring foreground hearts above background */
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background-color: purple;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before {
+            top: -15px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 15px;
+        }
+
+        .background-heart {
+            width: 20px;
+            height: 20px;
+            background-color: skyblue;
+            position: absolute;
+            z-index: 1; /* Send background hearts behind */
+            transform: rotate(-45deg);
+            opacity: 0.5; /* Set transparency */
+        }
+
+        .background-heart::before,
+        .background-heart::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-color: skyblue;
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0.5; /* Set transparency for pseudo-elements */
+        }
+
+        .background-heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .background-heart::after {
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <center><h1 style="color:rgb(0, 221, 255);">Hey MERCY papa</h1></center>
+    <center><h1 style="color:red;">LET GOD CONFIRM OUR MARRIAGE</h1></center>
+    <center><h2 style="color:white;">ONCE IT IS CONFIRMED</h2></center>
+    <center><h2 style="color:white;">THE LOVE LETTER AND MY LOVE TOWARDS YOU WILL BE MUCH MORE Beautiful THAN ANYONE CAN IMAGINE</h2></center>
+    <center><h2 style="color:white;">MERCY, papa, please pray for me, I am also praying for you, I am fixed with you so I can't leave you.So that by the God's mercy, grace, blessings we will marry.</h2></center>
+    <center><h2 style="color:white;">MERCY papa</h2><h1><p style="color:rgb(132, 220, 255);">I L_V_ YOU so much</p></h1></center>
+    <center><h2 style="color:white;">You are a blessing to my life</h2></center>
+    <center><h2 style="color:white;">these gaps will be filled through our marriage.</h2></center>
+    <center><h2 style="color:white;">MERCY, take care, you are mine and I am yours.</h2></center>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Function to create background hearts
+            function createBackgroundHeart() {
+                const heart = document.createElement('div');
+                heart.classList.add('background-heart');
+                const randomX = Math.random() * window.innerWidth;
+                const randomY = Math.random() * window.innerHeight;
+
+                heart.style.left = `${randomX}px`;
+                heart.style.top = `${randomY}px`;
+
+                document.body.appendChild(heart);
+
+                // Remove the heart after some time
+                setTimeout(() => heart.remove(), 1000000); // Adjust time as needed
+            }
+
+            // Create multiple background hearts
+            for (let i = 0; i < 50; i++) { // Change the number for more/less hearts
+                createBackgroundHeart();
+            }
+
+            // Function to create hearts
+            function createHeart(x, y) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.position = 'absolute';
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+
+                document.body.appendChild(heart);
+
+                // Animate the heart flying away
+                const flyAway = () => {
+                    const randomX = Math.random() * 200 - 100; // Random horizontal distance
+                    const randomY = Math.random() * -200; // Random vertical distance upwards
+
+                    heart.animate([
+                        { transform: `translate(0, 0)` },
+                        { transform: `translate(${randomX}px, ${randomY}px)`, opacity: 0 }
+                    ], {
+                        duration: 2000, // Duration for the animation
+                        easing: 'ease-in-out',
+                        fill: 'forwards'
+                    });
+
+                    // Remove the heart after animation
+                    setTimeout(() => heart.remove(), 3000);
+                };
+
+                flyAway();
+            }
+
+            // Event listener for tap/click
+            document.body.addEventListener('click', (event) => {
+                // Create multiple hearts at the tap position
+                for (let i = 0; i < 10; i++) { // Increased number of hearts
+                    createHeart(event.clientX + (Math.random() * 20 - 10), event.clientY + (Math.random() * 20 - 10));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
